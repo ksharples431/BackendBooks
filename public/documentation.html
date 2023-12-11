@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Documentation</title>
+  </head>
+  <body>
+    <h1>My Books API: Documentation</h1>
+    <h2>About this API</h2>
+    <p>
+      A simple API that provides users with information about books,
+      authors, and genres.
+    </p>
+    <h2>The API's features include</h2>
+    <div>
+      <ul>
+        <li>Allows new users to register</li>
+        <li>Allows users to login</li>
+        <li>Returns list of all users</li>
+        <li>Returns data about a single user</li>
+        <li>Allows users to update thier user info</li>
+        <li>Allows existing users to deregister</li>
+        <li>Allows users to add a book to a list of their favorites</li>
+        <li>Allows users to remove a book from their favorites list</li>
+        <li>Returns list of all books</li>
+        <li>
+          Returns data about any single book including description, author,
+          genre
+        </li>
+        <li>Returns data about a specific author</li>
+        <li>Returns data about a specific genre</li>
+        <li>Allows users to add a book</li>
+        <li>Allows users to edit a book</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Endpoints</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Business Logic</th>
+            <th>URL</th>
+            <th>HTTP Method</th>
+            <th>Query Parameters</th>
+            <th>Request Body Data Format</th>
+            <th>Response Body Data Format</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Allows new users to register</td>
+            <td>/signup</td>
+            <td>POST</td>
+            <td>-</td>
+            <td>
+              A JSON object holding data about the user to register,
+              structured as: { username: req.body.username }. Including - email, password, birthday.
+            </td>
+            <td>
+              A JSON object holding data about the user that was added
+            </td>
+          </tr>
+
+          <tr>
+            <td>Allows a user to login</td>
+            <td>/login</td>
+            <td>POST</td>
+            <td>-</td>
+            <td>
+              A JSON object holding data about the user to login,
+              structured as: { username: req.body.username }. Including - email, password, birthday.
+            </td>
+            <td>
+              A JSON object holding data about the user that was added
+            </td>
+          </tr>
+
+          <tr>
+            <td>Returns a list of all users</td>
+            <td>/users</td>
+            <td>GET</td>
+            <td>-</td>
+            <td>-</td>
+            <td>A JSON object holding data about all the users</td>
+          </tr>
+
+          <tr>
+            <td>Returns data about a single user by user id</td>
+            <td>/users/:uid</td>
+            <td>GET</td>
+            <td>:uid</td>
+            <td>-</td>
+            <td>A JSON object holding data about a single user</td>
+          </tr>
+
+          <tr>
+            <td>Allows users to update their user info</td>
+            <td>/users/:uid</td>
+            <td>PATCH</td>
+            <td>:uid</td>
+            <td>
+              A JSON object holding data with the user's updated info,
+              structured as: { username: req.body.username }. Including - email, password, birthday
+            </td>
+            <td>
+              A JSON object holding data about the updated user information
+            </td>
+          </tr>
+
+          <tr>
+            <td>Allows existing users to deregister</td>
+            <td>/users/:uid</td>
+            <td>DELETE</td>
+            <td>:uid</td>
+            <td>-</td>
+            <td>
+              A text message indicating whether the user has successfully
+              deregistered
+            </td>
+          </tr>
+
+          <tr>
+            <td>Allows users to add a book to their favorites</td>
+            <td>/users/:uid/:bid</td>
+            <td>POST</td>
+            <td>:uid, :bid</td>
+            <td>-</td>
+            <td>
+              A JSON object holding data about the user and the book that
+              was added
+            </td>
+          </tr>
+
+          <tr>
+            <td>Allows users to remove a book from their favorites</td>
+            <td>/users/:uid/:bid</td>
+            <td>DELETE</td>
+            <td>:uid, :bid</td>
+            <td>-</td>
+            <td>
+              A text message indicating whether the user has successfully
+              removed the favorite
+            </td>
+          </tr>
+
+          <tr>
+            <td>Returns a list of all books</td>
+            <td>/books</td>
+            <td>GET</td>
+            <td>-</td>
+            <td>-</td>
+            <td>A JSON object holding data about all the books</td>
+          </tr>
+
+          <tr>
+            <td>Returns data about a single book by title</td>
+            <td>/books/:title</td>
+            <td>GET</td>
+            <td>:title</td>
+            <td>-</td>
+            <td>A JSON object holding data about a single book</td>
+          </tr>
+
+          <tr>
+            <td>Returns data about an author by author name</td>
+            <td>/books/:authorName</td>
+            <td>GET</td>
+            <td>:authorName</td>
+            <td>-</td>
+            <td>A JSON object holding data about a specific author</td>
+          </tr>
+
+          <tr>
+            <td>Returns data about a genre by genre name</td>
+            <td>/books/:genreName</td>
+            <td>GET</td>
+            <td>:genreName</td>
+            <td>-</td>
+            <td>
+              A JSON object holding data about a specific genre of book
+            </td>
+          </tr>
+
+          <tr>
+            <td>Allows a user to add a book</td>
+            <td>/books/add</td>
+            <td>POST</td>
+            <td>-</td>
+            <td>
+              A JSON object holding data about the book, structured as: {
+              title: req.body.title }. Including - title, author, image,
+              description, genre, series, and seriesNumber
+            </td>
+            <td>
+              A JSON object holding data about the book that was added
+            </td>
+          </tr>
+
+          <tr>
+            <td>Allows a user to edit a book</td>
+            <td>/books/:bid</td>
+            <td>PATCH</td>
+            <td>:bid</td>
+            <td>
+              A JSON object holding data about the book, structured as: {
+              title: req.body.title }. Including - title, author, image,
+              description, genre, series, and seriesNumber
+            </td>
+            <td>
+              A JSON object holding data about the book that was added
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
