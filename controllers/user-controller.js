@@ -120,66 +120,66 @@ const deleteUserByUsername = async (req, res, next) => {
 ////////// FAVORITES //////////
 ////////// POST //////////
 // ID //
-// const addBookToFavorites = async (req, res, next) => {
-//   let updatedUser;
-//   try {
-//     updatedUser = await User.findOneAndUpdate(
-//       { _id: req.params.uid },
-//       {
-//         $addToSet: { favorites: req.params.bid },
-//       },
-//       { new: true }
-//     );
-//   } catch (err) {
-//     const error = new HttpError(
-//       'Adding book to favorites failed, please try again later.',
-//       500
-//     );
-//     return next(error);
-//   }
-//   if (!updatedUser) {
-//     const error = new HttpError(
-//       'Could not find a user for the provided id.',
-//       404
-//     );
-//     return next(error);
-//   }
-//   res.status(200).json(updatedUser);
-// };
+const addBookToFavorites = async (req, res, next) => {
+  let updatedUser;
+  try {
+    updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.uid },
+      {
+        $addToSet: { favorites: req.params.bid },
+      },
+      { new: true }
+    );
+  } catch (err) {
+    const error = new HttpError(
+      'Adding book to favorites failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+  if (!updatedUser) {
+    const error = new HttpError(
+      'Could not find a user for the provided id.',
+      404
+    );
+    return next(error);
+  }
+  res.status(200).json(updatedUser);
+};
 
 ////////// DELETE //////////
 // ID //
-// const deleteBookFromFavorites = async (req, res, next) => {
-//   let updatedUser;
-//   try {
-//     updatedUser = await User.findOneAndUpdate(
-//       { _id: req.params.uid },
-//       {
-//         $pull: { favorites: req.params.bid },
-//       },
-//       { new: true }
-//     );
-//   } catch (err) {
-//     const error = new HttpError(
-//       'Deleting book from favorites failed, please try again later.',
-//       500
-//     );
-//     return next(error);
-//   }
-//   if (!updatedUser) {
-//     const error = new HttpError(
-//       'Could not find a user for the provided id.',
-//       404
-//     );
-//     return next(error);
-//   }
-//   res.status(200).json(updatedUser);
-// };
+const deleteBookFromFavorites = async (req, res, next) => {
+  let updatedUser;
+  try {
+    updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.uid },
+      {
+        $pull: { favorites: req.params.bid },
+      },
+      { new: true }
+    );
+  } catch (err) {
+    const error = new HttpError(
+      'Deleting book from favorites failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+  if (!updatedUser) {
+    const error = new HttpError(
+      'Could not find a user for the provided id.',
+      404
+    );
+    return next(error);
+  }
+  res.status(200).json(updatedUser);
+};
 
 exports.createUser = createUser;
 exports.getAllUsers = getAllUsers;
 exports.getUserByUsername = getUserByUsername;
 exports.updateUserByUsername = updateUserByUsername;
 exports.deleteUserByUsername = deleteUserByUsername;
-// exports.addBookToFavorites = addBookToFavorites;
-// exports.deleteBookFromFavorites = deleteBookFromFavorites;
+exports.addBookToFavorites = addBookToFavorites;
+exports.deleteBookFromFavorites = deleteBookFromFavorites;

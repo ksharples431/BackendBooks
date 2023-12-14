@@ -19,16 +19,16 @@ router.delete('/:username', userController.deleteUserByUsername);
 ////////// FAVORITES //////////
 ////////// POST //////////
 // ID //
-// router.patch(
-//   '/id/:uid/favorites/id/:bid',
-//   userController.addBookToFavorites
-// );
+router.patch(
+  '/:uid/favorites/:bid',
+  userController.addBookToFavorites
+);
 // USERNAME //
 ////////// DELETE //////////
 // ID //
-// router.delete(
-//   '/id/:uid/favorites/id/:bid',
-//   userController.deleteBookFromFavorites
-// );
+router.delete(
+  '/:uid/favorites/:bid',
+  userController.deleteBookFromFavorites
+);
 
 module.exports = router;
