@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user-routes');
+const bookRoutes = require('./routes/book-routes');
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.get('/documentation', (req, res) => {
 });
 
 app.use('/users', userRoutes);
+app.use('/books', bookRoutes);
 
 // Error Handling
 app.use((err, req, res, next) => {
