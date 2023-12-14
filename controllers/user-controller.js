@@ -1,6 +1,7 @@
 const User = require('../models/user-model');
 const HttpError = require('../models/http-error');
 
+////////// USERS //////////
 ////////// POST //////////
 const createUser = async (req, res, next) => {
   const { username, password, email } = req.body;

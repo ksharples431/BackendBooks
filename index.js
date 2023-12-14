@@ -1,10 +1,12 @@
 require('dotenv').config();
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+const authRoutes = require('./routes/auth-routes');
 const userRoutes = require('./routes/user-routes');
 const bookRoutes = require('./routes/book-routes');
 
@@ -13,7 +15,6 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-require('dotenv').config();
 
 const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
@@ -40,9 +41,7 @@ const accessLogStream = fs.createWriteStream(
 
 app.use(morgan('combined', { stream: accessLogStream }));
 
-
 // Routes
-app.use('/documentation', express.static('public'));
 
 app.get('/', (req, res) => {
   res.send('Welcome to my book club!');
@@ -52,6 +51,7 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: __dirname });
 });
 
+app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/books', bookRoutes);
 
@@ -62,7 +62,9 @@ app.use((err, req, res, next) => {
     return next(err);
   }
   res.status(err.code || 500);
-  res.json({ message: err.message || 'An unknown error occured! (index.js)' });
+  res.json({
+    message: err.message || 'An unknown error occured! (index.js)',
+  });
 });
 
 // DB Connection
