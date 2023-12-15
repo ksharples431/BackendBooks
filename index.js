@@ -17,7 +17,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://backendbooks-9697c5937ad6.herokuapp.com'];
+let allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost:1234',
+  'https://backendbooks-9697c5937ad6.herokuapp.com',
+  'http://localhost:10510',
+];
 
 app.use(
   cors({
