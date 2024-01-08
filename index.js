@@ -20,8 +20,8 @@ const cors = require('cors');
 let allowedOrigins = [
   'http://localhost:8080',
   'http://localhost:1234',
-  'https://backendbooks-9697c5937ad6.herokuapp.com',
   'http://localhost:10510',
+  'https://backendbooks-9697c5937ad6.herokuapp.com',
 ];
 
 app.use(
