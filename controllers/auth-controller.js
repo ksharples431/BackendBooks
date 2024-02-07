@@ -14,30 +14,10 @@ const loginUser = async (req, res, next) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
+    const displayBirthday = new Date(user.birthday)
+      .toISOString()
+      .split('T')[0];
 
-    const userInfo = {
-      username: user.username,
-      email: user.email,
-      token: token,
-      id: user._id,
-      image: user.imagePath,
-      birthday: user.birthday,
-      favorites: user.favorites,
-    };
-
-    res.status(200).json({ userInfo });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-///// SIGNUP /////
-const signupUser = async (req, res, next) => {
-  const {username, email, password, birthday } = req.body;
-  try {
-    const user = await User.signup(username, email, password, birthday);
-    const token = createToken(user._id);
-    const displayBirthday = new Date(user.birthday).toISOString().split('T')[0];
     const userInfo = {
       username: user.username,
       email: user.email,
@@ -50,7 +30,33 @@ const signupUser = async (req, res, next) => {
 
     res.status(200).json({ userInfo });
   } catch (error) {
-    res.status(400).json({error: error.message})
+    res.status(400).json({ error: error.message });
+  }
+};
+
+///// SIGNUP /////
+const signupUser = async (req, res, next) => {
+  const { username, email, password, birthday } = req.body;
+  try {
+    const user = await User.signup(username, email, password, birthday);
+    const token = createToken(user._id);
+    const displayBirthday = new Date(user.birthday)
+      .toISOString()
+      .split('T')[0];
+
+    const userInfo = {
+      username: user.username,
+      email: user.email,
+      token: token,
+      id: user._id,
+      image: user.imagePath,
+      birthday: displayBirthday,
+      favorites: user.favorites,
+    };
+
+    res.status(200).json({ userInfo });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
