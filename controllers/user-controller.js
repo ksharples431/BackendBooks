@@ -124,7 +124,7 @@ const deleteUserByUsername = async (req, res, next) => {
 const addBookToFavorites = async (req, res, next) => {
   let updatedUser;
   try {
-    user = await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { _id: req.params.uid },
       {
         $addToSet: { favorites: req.params.bid },
@@ -163,7 +163,7 @@ const addBookToFavorites = async (req, res, next) => {
 const deleteBookFromFavorites = async (req, res, next) => {
   let updatedUser;
   try {
-    user = await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { _id: req.params.uid },
       {
         $pull: { favorites: req.params.bid },
