@@ -6,6 +6,10 @@ const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 };
 
+const displayBirthday = new Date(user.birthday)
+  .toISOString()
+  .split('T')[0];
+
 ////////// POST //////////
 // LOGIN //
 const loginUser = async (req, res, next) => {
@@ -21,7 +25,7 @@ const loginUser = async (req, res, next) => {
       token: token,
       id: user._id,
       image: user.imagePath,
-      birthday: user.birthday,
+      birthday: displayBirthday,
       favorites: user.favorites,
     };
 
@@ -37,7 +41,6 @@ const signupUser = async (req, res, next) => {
   try {
     const user = await User.signup(username, email, password, birthday);
     const token = createToken(user._id);
-    const displayBirthday = new Date(user.birthday).toISOString().split('T')[0];
     const userInfo = {
       username: user.username,
       email: user.email,
