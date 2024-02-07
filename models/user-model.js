@@ -4,15 +4,6 @@ const validator = require('validator');
 
 const Schema = mongoose.Schema;
 
-// Fix the date format for virtual field
-function dateFormat(date) {
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  const year = date.getFullYear();
-
-  return`${month}-${day}-${year}`;
-}
-
 const userSchema = new Schema(
   {
     username: { type: String, required: false },
@@ -23,9 +14,6 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-
-// Virtual field for formatted birthday
-userSchema.virtual('formattedBirthday').get(function () {return dateFormat(this.birthday)});
 
 userSchema.statics.signup = async function (
   username,
