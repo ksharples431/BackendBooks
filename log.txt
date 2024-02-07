@@ -94,5 +94,3 @@
 127.0.0.1 - - [15/Dec/2023:02:07:54 +0000] "GET /users HTTP/1.1" 401 37 "-" "PostmanRuntime/7.35.0"
 127.0.0.1 - - [15/Dec/2023:02:08:02 +0000] "GET /users HTTP/1.1" 401 37 "-" "PostmanRuntime/7.35.0"
 127.0.0.1 - - [15/Dec/2023:02:08:34 +0000] "GET /users HTTP/1.1" 401 37 "-" "PostmanRuntime/7.35.0"
-127.0.0.1 - - [07/Feb/2024:20:04:39 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-127.0.0.1 - - [07/Feb/2024:20:04:39 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
