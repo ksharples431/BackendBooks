@@ -14,9 +14,6 @@ const loginUser = async (req, res, next) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    const displayBirthday = new Date(user.birthday)
-      .toISOString()
-      .split('T')[0];
 
     const userInfo = {
       username: user.username,
@@ -24,7 +21,7 @@ const loginUser = async (req, res, next) => {
       token: token,
       _id: user._id,
       image: user.imagePath,
-      birthday: displayBirthday,
+      birthday: user.birthday,
       favorites: user.favorites,
     };
 
@@ -37,12 +34,14 @@ const loginUser = async (req, res, next) => {
 ///// SIGNUP /////
 const signupUser = async (req, res, next) => {
   const { username, email, password, birthday } = req.body;
+  const formattedBirthday = new Date(birthday)
+    .toISOString()
+    .split('T')[0];
+
   try {
-    const user = await User.signup(username, email, password, birthday);
+    const user = await User.signup(username, email, password, formattedBirthday);
     const token = createToken(user._id);
-    const displayBirthday = new Date(user.birthday)
-      .toISOString()
-      .split('T')[0];
+    
 
     const userInfo = {
       username: user.username,
@@ -50,7 +49,7 @@ const signupUser = async (req, res, next) => {
       token: token,
       _id: user._id,
       image: user.imagePath,
-      birthday: displayBirthday,
+      birthday: user.birthday,
       favorites: user.favorites,
     };
 
