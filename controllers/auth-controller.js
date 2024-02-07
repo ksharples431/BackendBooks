@@ -21,7 +21,7 @@ const loginUser = async (req, res, next) => {
       token: token,
       _id: user._id,
       image: user.imagePath,
-      birthday: user.birthday,
+      birthday: user.formattedBirthday,
       favorites: user.favorites,
     };
 
@@ -46,7 +46,7 @@ const signupUser = async (req, res, next) => {
       token: token,
       _id: user._id,
       image: user.imagePath,
-      birthday: user.birthday,
+      birthday: user.formattedBirthday,
       favorites: user.favorites,
     };
 
