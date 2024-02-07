@@ -124,23 +124,13 @@ const deleteUserByUsername = async (req, res, next) => {
 const addBookToFavorites = async (req, res, next) => {
   let updatedUser;
   try {
-    data = await User.findOneAndUpdate(
+    updatedUser = await User.findOneAndUpdate(
       { _id: req.params.uid },
       {
         $addToSet: { favorites: req.params.bid },
       },
       { new: true }
     );
-
-    updatedUser = {
-      username: user.username,
-      email: user.email,
-      token: token,
-      _id: user._id,
-      image: user.imagePath,
-      birthday: user.formattedBirthday,
-      favorites: user.favorites,
-    };
   } catch (err) {
     const error = new HttpError(
       'Adding book to favorites failed, please try again later.',
@@ -148,7 +138,7 @@ const addBookToFavorites = async (req, res, next) => {
     );
     return next(error);
   }
-  if (!data) {
+  if (!updatedUser) {
     const error = new HttpError(
       'Could not find a user for the provided id.',
       404
@@ -163,25 +153,13 @@ const addBookToFavorites = async (req, res, next) => {
 const deleteBookFromFavorites = async (req, res, next) => {
   let updatedUser;
   try {
-    data = await User.findOneAndUpdate(
+    updatedUser = await User.findOneAndUpdate(
       { _id: req.params.uid },
       {
         $pull: { favorites: req.params.bid },
       },
       { new: true }
     );
-
-    updatedUser = {
-      username: user.username,
-      email: user.email,
-      token: token,
-      _id: user._id,
-      image: user.imagePath,
-      birthday: user.formattedBirthday,
-      favorites: user.favorites,
-    };
-
-
   } catch (err) {
     const error = new HttpError(
       'Deleting book from favorites failed, please try again later.',
@@ -189,7 +167,7 @@ const deleteBookFromFavorites = async (req, res, next) => {
     );
     return next(error);
   }
-  if (!data) {
+  if (!updatedUser) {
     const error = new HttpError(
       'Could not find a user for the provided id.',
       404
