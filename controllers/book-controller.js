@@ -5,30 +5,36 @@ const HttpError = require('../models/http-error');
 const createBook = async (req, res, next) => {
   const {
     title,
+    author,
     description,
-    author: { name: author },
-    genre: { name: genre },
+    genre,
     imagePath,
     seriesName,
     seriesNumber,
-    featured,
+    format,
+    whereToGet,
+    read,
+    favorite,
+    wishlist,
+    owned,
   } = req.body;
   let book;
 
   try {
     book = await Book.create({
       title,
+      author,
       description,
-      author: {
-        name: author,
-      },
-      genre: {
-        name: genre,
-      },
+      genre,
       imagePath,
       seriesName,
       seriesNumber,
-      featured,
+      format,
+      whereToGet,
+      read,
+      favorite,
+      wishlist,
+      owned,
     });
   } catch (err) {
     const error = new HttpError(

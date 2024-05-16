@@ -5,19 +5,19 @@ const Schema = mongoose.Schema;
 const bookSchema = new Schema(
   {
     title: { type: String, required: true },
-    author: {
-      name: String,
-      bio: String,
-    },
-    description: { type: String, required: true },
-    genre: {
-      name: String,
-      description: String,
-    },
+    author: { type: String, required: true },
+    description: String,
+    genre: String,
     imagePath: String,
     seriesName: String,
     seriesNumber: String,
-    featured: Boolean,
+    format: String,
+    whereToGet: String,
+    read: String,
+    favorite: Boolean,
+    wishlist: Boolean,
+    owned: Boolean,
+
   },
   { timestamps: true }
 );
