@@ -6,17 +6,17 @@ const createBook = async (req, res, next) => {
   const {
     title,
     author,
-    description,
-    genre,
     imagePath,
+    genre,
+    description,
     seriesName,
     seriesNumber,
     format,
-    whereToGet,
-    read,
-    favorite,
-    wishlist,
     owned,
+    progress,
+    favorite,
+    whereToGet,
+    wishlist,
   } = req.body;
   let book;
 
@@ -24,17 +24,17 @@ const createBook = async (req, res, next) => {
     book = await Book.create({
       title,
       author,
-      description,
-      genre,
       imagePath,
+      genre,
+      description,
       seriesName,
       seriesNumber,
       format,
-      whereToGet,
-      read,
-      favorite,
-      wishlist,
       owned,
+      progress,
+      favorite,
+      whereToGet,
+      wishlist,
     });
   } catch (err) {
     const error = new HttpError(
@@ -45,6 +45,7 @@ const createBook = async (req, res, next) => {
   }
   res.status(201).json(book);
 };
+
 ////////// GET //////////
 // ALL //
 const getAllBooks = async (req, res, next) => {
@@ -60,6 +61,7 @@ const getAllBooks = async (req, res, next) => {
   }
   res.status(200).json(books);
 };
+
 // ID //
 const getBookById = async (req, res, next) => {
   let book;
@@ -86,7 +88,7 @@ const getBookById = async (req, res, next) => {
 const getAuthorByName = async (req, res, next) => {
   let author;
   try {
-    author = await Book.find({ 'author.name': req.params.authorName });
+    author = await Book.find({ 'author': req.params.authorName });
   } catch (err) {
     const error = new HttpError(
       'Fetching author failed, please try again later.',
@@ -103,11 +105,12 @@ const getAuthorByName = async (req, res, next) => {
   }
   res.status(200).json(author);
 };
+
 // GENRE NAME //
 const getGenreByName = async (req, res, next) => {
   let genre;
   try {
-    genre = await Book.find({ 'genre.name': req.params.genreName });
+    genre = await Book.find({ 'genre': req.params.genreName });
   } catch (err) {
     const error = new HttpError(
       'Fetching genre failed, please try again later.',

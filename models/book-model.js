@@ -6,17 +6,17 @@ const bookSchema = new Schema(
   {
     title: { type: String, required: true },
     author: { type: String, required: true },
-    description: String,
-    genre: String,
     imagePath: String,
+    genre: String,
+    description: String,
     seriesName: String,
     seriesNumber: String,
     format: String,
-    whereToGet: String,
-    read: String,
-    favorite: Boolean,
-    wishlist: Boolean,
     owned: Boolean,
+    progress: String,
+    favorite: Boolean,
+    whereToGet: String,
+    wishlist: Boolean,
 
   },
   { timestamps: true }
