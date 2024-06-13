@@ -19,10 +19,7 @@ const loginUser = async (req, res, next) => {
       username: user.username,
       email: user.email,
       token: token,
-      _id: user._id,
-      image: user.imagePath,
-      birthday: user.birthday,
-      favorites: user.favorites,
+      id: user._id,
     };
 
     res.status(200).json({ userInfo });
@@ -33,19 +30,21 @@ const loginUser = async (req, res, next) => {
 
 ///// SIGNUP /////
 const signupUser = async (req, res, next) => {
-  const { username, email, password, birthday } = req.body;
+  const { username, email, password, verifyPassword } = req.body;
+
+  if (password !== verifyPassword) {
+    return res.status(400).json({ message: 'Passwords do not match' });
+  }
+
   try {
-    const user = await User.signup(username, email, password, birthday);
+    const user = await User.signup(username, email, password);
     const token = createToken(user._id);
 
     const userInfo = {
       username: user.username,
       email: user.email,
       token: token,
-      _id: user._id,
-      image: user.imagePath,
-      birthday: user.birthday,
-      favorites: user.favorites,
+      id: user._id,
     };
 
     res.status(200).json({ userInfo });
