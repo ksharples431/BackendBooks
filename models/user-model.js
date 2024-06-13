@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    username: { type: String, required: false },
+    username: { type: String, required: true },
     password: { type: String, required: true, minlength: 3 },
     email: { type: String, required: true, unique: true },
-    birthday: Date,
-    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
+    // birthday: Date,
+    // favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
   },
   { timestamps: true }
 );

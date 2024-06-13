@@ -39,6 +39,7 @@ const signupUser = async (req, res, next) => {
   try {
     const user = await User.signup(username, email, password);
     const token = createToken(user._id);
+    console.log('Generated Token:', token); 
 
     const userInfo = {
       username: user.username,

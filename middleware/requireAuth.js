@@ -4,6 +4,7 @@ const User = require('../models/user-model');
 
 const requireAuth = async (req, res, next) => {
   const { authorization } = req.headers;
+  console.log('Authorization Header:', authorization); 
 
   if (!authorization) {
     return res
@@ -14,9 +15,10 @@ const requireAuth = async (req, res, next) => {
   const token = authorization.split(' ')[1];
 
   try {
-    const { id } = jwt.verify(token, process.env.JWT_SECRET);
+    const { _id } = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Decoded Token ID:', _id);
 
-    req.user = await User.findOne({ id }).select('_id');
+    req.user = await User.findOne(_id).select('_id');
     next();
   } catch (err) {
     console.log(err);
