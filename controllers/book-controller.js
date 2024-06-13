@@ -138,13 +138,18 @@ const updateBookById = async (req, res, next) => {
       {
         $set: {
           title: req.body.title,
-          description: req.body.description,
           author: req.body.author,
-          genre: req.body.genre,
           imagePath: req.body.imagePath,
+          genre: req.body.genre,
           seriesName: req.body.seriesName,
           seriesNumber: req.body.seriesNumber,
-          featured: req.body.featured,
+          description: req.body.description,
+          format: req.body.format,
+          whereToGet: req.body.whereToGet,
+          progress: req.body.progress,
+          owned: req.body.owned,
+          favorite: req.body.favorite,
+          wishlist: req.body.wishlist,
         },
       },
       { new: true }
