@@ -1,11 +1,11 @@
 const express = require('express');
 
 const bookController = require('../controllers/book-controller');
-// const requireAuth = require('../middleware/requireAuth');
+const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
-// router.use(requireAuth)
+router.use(requireAuth)
 
 ///// POST /////
 router.post('/', bookController.createBook);
