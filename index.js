@@ -6,7 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 const authRoutes = require('./routes/auth-routes');
@@ -21,17 +21,17 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());  
 
-// let allowedOrigins = [
-//   'http://localhost:5173'
-// ];
+let allowedOrigins = [
+  'http://localhost:5173'
+];
 
-// app.use(
-//   cors({
-//     origin: allowedOrigins, 
-//     methods: ['GET'],
-//     credentials: true 
-//   })
-// );
+app.use(
+  cors({
+    origin: allowedOrigins, 
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
+    credentials: true 
+  })
+);
 
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, 'log.txt'),
