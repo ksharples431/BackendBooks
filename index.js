@@ -22,26 +22,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());  
 
 let allowedOrigins = [
-  'http://localhost:8080',
-  'http://localhost:1234',
-  'http://localhost:10510',
-  'https://backendbooks-9697c5937ad6.herokuapp.com',
-  'https://my-book-series-tracker.netlify.app',
-  'http://localhost:5173/books'
+  'http://localhost:5173'
 ];
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        let message =
-          `The CORS policy for this application doesn’t allow access from origin: ${origin}`
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    },
-    credentials: true,
+    origin: allowedOrigins, 
+    methods: ['GET'],
+    credentials: true 
   })
 );
 
