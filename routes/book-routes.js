@@ -6,7 +6,7 @@ const protect = require('../middleware/authMiddleware');
 const router = express.Router();
 
 ///// POST /////
-router.post('/', bookController.createBook);
+router.post('/', protect, bookController.createBook);
 
 ///// GET /////
 router.get('/', protect, bookController.getAllBooks);
