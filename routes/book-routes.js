@@ -1,17 +1,15 @@
 const express = require('express');
 
 const bookController = require('../controllers/book-controller');
-const requireAuth = require('../middleware/requireAuth');
+const protect = require('../middleware/authMiddleware');
 
 const router = express.Router();
-
-router.use(requireAuth)
 
 ///// POST /////
 router.post('/', bookController.createBook);
 
 ///// GET /////
-router.get('/', bookController.getAllBooks);
+router.get('/', protect, bookController.getAllBooks);
 router.get('/:bid', bookController.getBookById);
 router.get('/authors/:authorName', bookController.getAuthorByName);
 router.get('/genres/:genreName', bookController.getGenreByName);

@@ -141,3 +141,5 @@
 127.0.0.1 - - [14/Jun/2024:16:29:07 +0000] "POST /auth/login HTTP/1.1" 201 76 "-" "PostmanRuntime/7.39.0"
 127.0.0.1 - - [14/Jun/2024:16:32:41 +0000] "POST /auth/logout HTTP/1.1" 500 1264 "-" "PostmanRuntime/7.39.0"
 127.0.0.1 - - [14/Jun/2024:16:32:49 +0000] "POST /auth/logout HTTP/1.1" 200 29 "-" "PostmanRuntime/7.39.0"
+127.0.0.1 - - [14/Jun/2024:17:29:13 +0000] "POST /auth/logout HTTP/1.1" 200 29 "-" "PostmanRuntime/7.39.0"
+127.0.0.1 - - [14/Jun/2024:17:29:21 +0000] "POST /auth/login HTTP/1.1" 201 76 "-" "PostmanRuntime/7.39.0"

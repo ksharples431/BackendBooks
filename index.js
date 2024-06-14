@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -17,6 +18,8 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());  
 
 let allowedOrigins = [
   'http://localhost:8080',
