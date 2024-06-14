@@ -27,7 +27,7 @@ let allowedOrigins = [
   'http://localhost:10510',
   'https://backendbooks-9697c5937ad6.herokuapp.com',
   'https://my-book-series-tracker.netlify.app',
-  'http://localhost:5173'
+  'http://localhost:5173/books'
 ];
 
 app.use(
