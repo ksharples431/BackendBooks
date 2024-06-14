@@ -36,8 +36,7 @@ app.use(
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
         let message =
-          'The CORS policy for this application doesn’t allow access from origin ' +
-          origin;
+          `The CORS policy for this application doesn’t allow access from origin: ${origin}`
         return callback(new Error(message), false);
       }
       return callback(null, true);
@@ -66,18 +65,6 @@ app.get('/documentation', (req, res) => {
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/books', bookRoutes);
-
-// Error Handling
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   if (res.headerSent) {
-//     return next(err);
-//   }
-//   res.status(err.code || 500);
-//   res.json({
-//     message: err.message || 'An unknown error occured! (index.js)',
-//   });
-// });
 
 app.use(notFound);
 app.use(errorHandler);
