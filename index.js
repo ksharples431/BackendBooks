@@ -27,7 +27,7 @@ let allowedOrigins = [
 
 app.use(
   cors({
-    origin: '*', 
+    origin: allowedOrigins, 
     methods: ['GET'],
     credentials: true 
   })
