@@ -6,6 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 const authRoutes = require('./routes/auth-routes');
 const userRoutes = require('./routes/user-routes');
@@ -63,16 +64,19 @@ app.use('/users', userRoutes);
 app.use('/books', bookRoutes);
 
 // Error Handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  if (res.headerSent) {
-    return next(err);
-  }
-  res.status(err.code || 500);
-  res.json({
-    message: err.message || 'An unknown error occured! (index.js)',
-  });
-});
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   if (res.headerSent) {
+//     return next(err);
+//   }
+//   res.status(err.code || 500);
+//   res.json({
+//     message: err.message || 'An unknown error occured! (index.js)',
+//   });
+// });
+
+app.use(notFound);
+app.use(errorHandler);
 
 // DB Connection
 mongoose.set('strictQuery', false);

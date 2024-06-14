@@ -1,58 +1,55 @@
-const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 
 const User = require('../models/user-model');
+const createToken = require('../utils/generateToken');
 
-const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-};
-
-////////// POST //////////
-// LOGIN //
-const loginUser = async (req, res, next) => {
+const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
-  try {
-    const user = await User.login(email, password);
-    const token = createToken(user._id);
+  const user = await User.login(email, password);
 
-    const userInfo = {
+  if (user) {
+    createToken(res, user._id);
+    res.status(201).json({
+      _id: user._id,
       username: user.username,
       email: user.email,
-      token: token,
-      id: user._id,
-    };
-
-    res.status(200).json({ userInfo });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    });
+  } else {
+    res.status(401);
+    throw new Error('Invalid email or password');
   }
-};
+});
 
-///// SIGNUP /////
-const signupUser = async (req, res, next) => {
+const signupUser = asyncHandler(async (req, res, next) => {
   const { username, email, password, verifyPassword } = req.body;
 
-  if (password !== verifyPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
-  }
+  const user = await User.signup(
+    username,
+    email,
+    password,
+    verifyPassword
+  );
 
-  try {
-    const user = await User.signup(username, email, password);
-    const token = createToken(user._id);
-    console.log('Generated Token:', token); 
-
-    res
-      .status(200)
-      .json({
-        username: user.username,
-        email: user.email,
-        token: token,
-        id: user._id,
-      });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  if (user) {
+    createToken(res, user._id);
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data');
   }
-};
+});
+
+const logoutUser = asyncHandler(async (req, res, next) => {
+  res.cookie('jwt', '', { httpOnly: true, expires: new Date(0) });
+  res.status(200).json({ message: 'User logged out' });
+});
+
 
 exports.loginUser = loginUser;
 exports.signupUser = signupUser;
+exports.logoutUser = logoutUser;
