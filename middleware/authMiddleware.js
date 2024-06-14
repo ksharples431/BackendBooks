@@ -4,7 +4,7 @@ const User = require('../models/user-model');
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
-
+  console.log(process.env.JWT_SECRET)
   token = req.cookies.jwt;
 
   if(token) {
